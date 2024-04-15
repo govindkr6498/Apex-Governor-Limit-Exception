@@ -1,0 +1,32 @@
+public class GovernorLimit {
+    // System.LimitException: Too many SOQL queries: 101
+    public static void soqlExmpale(){
+        List<Account> accLists = New List<Account>();
+        for(Integer i = 0;i<101;i++){
+            accLists = [Select id,Name from Account];
+        }
+    }
+    
+    // System.LimitException: Too many DML rows: 10001
+    public static void dmlRows(){
+        List<Account> accList = New List<Account>();
+        for(Integer i = 0; i<10007;i++){
+            Account acc = New Account();
+            acc.Name = 'Test Account '+i;
+            accList.add(acc);
+        }
+        if(!accList.isEmpty()){
+            insert accList;
+            
+        }
+    }
+    
+    // System.LimitException: Too many SOQL queries: 101
+    public static void dmlExample(){
+        for(Integer i = 0 ;i<102;i++){
+            Account acc = New Account();
+            acc.Name = 'Account Test '+i;
+            insert acc;
+        }
+    }
+}
